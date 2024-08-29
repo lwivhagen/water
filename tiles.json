@@ -1,0 +1,141 @@
+[
+  {
+    "id": 1,
+    "name": "air"
+  },
+  {
+    "id": 2,
+    "name": "grass",
+    "texturePath": "res://grass.png"
+  },
+  {
+    "id": 3,
+    "name": "dirt",
+    "texturePath": "res://dirt.png"
+  },
+  {
+    "id": 4,
+    "name": "stone",
+    "texturePath": "res://stone.png"
+  },
+  {
+    "id": 5,
+    "name": "wood",
+    "texturePath": "res://wood.png"
+  },
+  {
+    "id": 6,
+    "name": "leaves",
+    "texturePath": "res://leaves.png"
+  },
+  {
+    "id": 7,
+    "name": "water",
+    "texturePath": "res://water.png"
+  },
+  {
+    "id": 8,
+    "name": "lava",
+    "texturePath": "res://lava.png"
+  },
+  {
+    "id": 9,
+    "name": "sand",
+    "texturePath": "res://sand.png"
+  },
+  {
+    "id": 10,
+    "name": "glass",
+    "texturePath": "res://glass.png"
+  },
+  {
+    "id": 11,
+    "name": "brick",
+    "texturePath": "res://brick.png"
+  },
+  {
+    "id": 12,
+    "name": "obsidian",
+    "texturePath": "res://obsidian.png"
+  },
+  {
+    "id": 13,
+    "name": "diamond",
+    "texturePath": "res://diamond.png"
+  },
+  {
+    "id": 14,
+    "name": "gold",
+    "texturePath": "res://gold.png"
+  },
+  {
+    "id": 15,
+    "name": "iron",
+    "texturePath": "res://iron.png"
+  },
+  {
+    "id": 16,
+    "name": "coal",
+    "texturePath": "res://coal.png"
+  },
+  {
+    "id": 17,
+    "name": "redstone",
+    "texturePath": "res://redstone.png"
+  },
+  {
+    "id": 18,
+    "name": "lapis",
+    "texturePath": "res://lapis.png"
+  },
+  {
+    "id": 19,
+    "name": "emerald",
+    "texturePath": "res://emerald.png"
+  },
+  {
+    "id": 20,
+    "name": "quartz",
+    "texturePath": "res://quartz.png"
+  },
+  {
+    "id": 21,
+    "name": "nether",
+    "texturePath": "res://nether.png"
+  },
+  {
+    "id": 22,
+    "name": "end",
+    "texturePath": "res://end.png"
+  },
+  {
+    "id": 23,
+    "name": "bedrock",
+    "texturePath": "res://bedrock.png"
+  },
+  {
+    "id": 24,
+    "name": "tnt",
+    "texturePath": "res://tnt.png"
+  },
+  {
+    "id": 25,
+    "name": "bookshelf",
+    "texturePath": "res://bookshelf.png"
+  },
+  {
+    "id": 26,
+    "name": "furnace",
+    "texturePath": "res://furnace.png"
+  },
+  {
+    "id": 27,
+    "name": "chest",
+    "texturePath": "res://chest.png"
+  },
+  {
+    "id": 28,
+    "name": "crafting",
+    "texturePath": "res://crafting.png"
+  }
+]
