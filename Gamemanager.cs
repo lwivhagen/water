@@ -68,6 +68,12 @@ public partial class Gamemanager : Node2D
 
 		GD.Print("Hello, World!");
 	}
+	public void Reset()
+	{
+		tiles = new TileMeta[0][];
+		tiles = Generatemap(50, 15);
+		WorldRenderer.Instance.Render(tiles);
+	}
 	private TileMeta[][] Generatemap(int width, int height)
 	{
 		TileMeta[][] map = new TileMeta[height][];

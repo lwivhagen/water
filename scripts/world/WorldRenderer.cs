@@ -12,6 +12,8 @@ public partial class WorldRenderer : Node2D
 	Texture2D dirtTexture = null;
 	[Export]
 	Texture2D airTexture = null;
+	[Export]
+	Texture2D sandTexture = null;
 
 
 	#region Singleton
@@ -58,6 +60,15 @@ public partial class WorldRenderer : Node2D
 					case 2:
 						texture = waterTexture;
 						break;
+					case 3:
+						texture = sandTexture;
+						break;
+					default:
+						GD.PushWarning("No texture found for tile id: " + tiles[row][column].id);
+						texture = airTexture;
+						break;
+
+
 				}
 				Sprite2D sprite2D = GetChild<Sprite2D>(row * tiles[row].Length + column);
 				if (sprite2D != null && texture != null)

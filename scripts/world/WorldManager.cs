@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using water;
+using water.scripts.world;
 
 public partial class WorldManager : Node2D
 {
@@ -16,7 +17,9 @@ public partial class WorldManager : Node2D
 		return new Vector2I(gm.tiles[0].Length * gm.tilesize, gm.tiles.Length * gm.tilesize);
 	}
 
-	Vector2 mousePosition;
+	private Vector2 mousePosition;
+	private Timer updateTimer;
+
 	public static WorldManager Instance
 	{
 		get
@@ -43,18 +46,28 @@ public partial class WorldManager : Node2D
 		// mousePosition -= new Vector2(GetWorldDimensionsPT().X / 2, GetWorldDimensionsPT().Y / 2);
 		mouseTilePosition = new Vector2I((int)(mousePosition.X / Gamemanager.Instance.tilesize), -(int)(mousePosition.Y / Gamemanager.Instance.tilesize));
 		if (Input.IsActionJustPressed("logic_r"))
-
 		{
-			// GD.Print("Tilesize: " + Gamemanager.Instance.tiles);
 			Gamemanager.Instance.tiles[mouseTilePosition.Y][mouseTilePosition.X] = new LiquidMeta(2, 0);
-
-			// GD.Print(Gamemanager.Instance.tiles[mouseTilePosition.Y][mouseTilePosition.X].id);
 			WorldRenderer.Instance.Render(Gamemanager.Instance.tiles);
 		}
-		if (Input.IsActionJustPressed("logic_f"))
+		if (Input.IsActionJustPressed("logic_t"))
 		{
-			Gamemanager.Instance.forceRightFlow = !Gamemanager.Instance.forceRightFlow;
+			GD.Print("Pressed t");
+			Gamemanager.Instance.tiles[mouseTilePosition.Y][mouseTilePosition.X] = new TileMeta(3);
+			WorldRenderer.Instance.Render(Gamemanager.Instance.tiles);
 		}
+		if (Input.IsActionJustPressed("logic_e"))
+		{
+			Gamemanager.Instance.tiles = LogicHandler.Instance.GranularLogic(Gamemanager.Instance.tiles);
+			WorldRenderer.Instance.Render(Gamemanager.Instance.tiles);
+		}
+
+		if (Input.IsActionJustPressed("logic_q"))
+		{
+			Gamemanager.Instance.Reset();
+			// WorldRenderer.Instance.Render(Gamemanager.Instance.tiles);
+		}
+
 
 	}
 }

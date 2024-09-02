@@ -35,20 +35,21 @@ namespace water.scripts.world
                 new TileType { id = 0, name = "Air", type = 0, texture = null },
                 new TileType { id = 1, name = "Dirt", type = 1, texture = null },
                 new TileType { id = 2, name = "Water", type = 2, texture = null },
+                new TileType { id = 3, name = "Sand", type = 3, texture = null },
                 // new TileType { id = 3, name = "Stone", type = 1, texture = null },
             };
             //load textures
-            for (int i = 0; i < allTiles.Length; i++)
-            {
-                try
-                {
-                    allTiles[i].texture = (Texture2D)GD.Load("res://" + allTiles[i].name.ToLower() + ".png");
-                }
-                catch (Exception e)
-                {
-                    GD.Print(e);
-                }
-            }
+            // for (int i = 0; i < allTiles.Length; i++)
+            // {
+            //     try
+            //     {
+            //         allTiles[i].texture = (Texture2D)GD.Load("res://" + allTiles[i].name.ToLower() + ".png");
+            //     }
+            //     catch (Exception e)
+            //     {
+            //         GD.Print(e);
+            //     }
+            // }
         }
         private TileType[] allTiles = new TileType[0];
 
@@ -69,11 +70,75 @@ namespace water.scripts.world
         {
             return allTiles[tile.id].type == 1;
         }
+        public bool IsGranular(TileMeta tile)
+        {
+            return allTiles[tile.id].type == 3;
+        }
+
+        public void SwapTiles(ref TileMeta a, ref TileMeta b)
+        {
+            TileMeta temp = a.Clone() as TileMeta;
+            a = b.Clone() as TileMeta;
+            b = temp;
+        }
+        public TileMeta[][] GranularLogic(TileMeta[][] map)
+        {
+            GD.Print("Granular Logic");
+            TileMeta[][] newMap = new TileMeta[map.Length][];
+            for (int i = 0; i < map.Length; i++)
+            {
+                newMap[i] = new TileMeta[map[i].Length];
+                for (int j = 0; j < map[i].Length; j++)
+                {
+                    newMap[i][j] = map[i][j].Clone() as TileMeta;
+                }
+            }
+            for (int row = 0; row < map.Length; row++)
+            {
+                for (int column = 0; column < map[row].Length; column++)
+                {
+                    if (row == 0 || !IsGranular(newMap[row][column]))
+                    {
+                        continue;
+                    }
+                    //move down if empty
+                    if (IsEmpty(newMap[row - 1][column]))
+                    {
+                        SwapTiles(ref newMap[row][column], ref newMap[row - 1][column]);
+                        // TileMeta tile = newMap[row][column].Clone() as TileMeta;
+                        // TileMeta fallspace = newMap[row - 1][column].Clone() as TileMeta;
+                        // newMap[row - 1][column] = tile;
+                        // newMap[row][column] = fallspace;
+                        continue;
+                    }
+                    Random random = new Random();
+                    int direction = random.Next(0, 2);
+                    direction = (2 * direction) - 1;
+                    if (IsEmpty(newMap[row - 1][column + direction]))
+                    {
+                        TileMeta myTile = newMap[row][column].Clone() as TileMeta;
+                        TileMeta fallspaceTile = newMap[row - 1][column + direction].Clone() as TileMeta;
+                        newMap[row - 1][column + direction] = myTile;
+                        newMap[row][column] = fallspaceTile;
+                        continue;
+                    }
+                    direction *= -1;
+                    if (IsEmpty(newMap[row - 1][column + direction]))
+                    {
+                        TileMeta myTile = newMap[row][column].Clone() as TileMeta;
+                        TileMeta fallspaceTile = newMap[row - 1][column + direction].Clone() as TileMeta;
+                        newMap[row - 1][column + direction] = myTile;
+                        newMap[row][column] = fallspaceTile;
+                        continue;
+                    }
+                }
+            }
+            return newMap;
+        }
         public TileMeta[][] LiquidLogic(TileMeta[][] map)
         {
-            GD.Print("Logic");
+            GD.Print("Liquid Logic");
             Random random = new Random();
-            TileMeta[][] returnMap = new TileMeta[3][];
             TileMeta[][] oldMap = map;
             TileMeta[][] newMap = new TileMeta[map.Length][];
             for (int i = 0; i < map.Length; i++)
